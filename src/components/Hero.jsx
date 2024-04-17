@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section>
       <div className="container">
-        <div className="grid md:grid-cols-6 gap-8 md:gap-0">
+        <div className="grid md:grid-cols-6 gap-2 md:gap-8">
           <div className="left-section flow-content--m col-span-4">
             <div className="img-wrapper">
               <img src={heroImg} alt="Hero Image" />
@@ -24,7 +24,7 @@ const Hero = () => {
                 </p>
                 <a
                   href=""
-                  className="bg-orange-600 text-white hover:bg-black focus:bg-black duration-300 tracking-wider uppercase px-12 py-2"
+                  className="bg-orange-600 text-white hover:bg-black focus:bg-black duration-300 tracking-wider uppercase px-12 py-2 mb-4 md:mb-0"
                 >
                   read more
                 </a>
