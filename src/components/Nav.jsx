@@ -1,10 +1,28 @@
-import { useState } from "react";
-import { logo, menuIcon, closeIcon} from "../assets";
+import { useEffect, useState } from "react";
+import { logo, menuIcon, closeIcon } from "../assets";
 
 const Nav = () => {
-  const [nav, setNav] = useState(false)
-  return (
-    <nav className="py-14">
+  const [nav, setNav] = useState(false);
+  const [scroll, setScroll] = useState(false)
+  const handleScroll = () => {
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 45) {
+        setScroll(true)       
+      } else{
+        setScroll(false)
+      }
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+return (
+    <nav className={scroll ? "py-14 bg-white z-[999] sticky top-0 left-0 right-0": "py-14 bg-white z-[999] "}>
       <div className="container flex justify-between items-center">
         <img src={logo} alt="Logo" className="logo" />
         <ul className="text-lg hidden md:flex items-center gap-4">
@@ -49,57 +67,52 @@ const Nav = () => {
             </a>
           </li>
         </ul>
-        <button className="mobile-toggle md:hidden" onClick={() => setNav(!nav)}>
-            <img src={menuIcon} alt="mobile menu icon" />
+        <button
+          className="mobile-toggle md:hidden"
+          onClick={() => setNav(!nav)}
+        >
+          <img src={menuIcon} alt="mobile menu icon" />
         </button>
-        <ul className={nav ? "fixed top-0 bottom-0 right-0 flex flex-col items-center justify-center gap-4 translate-x-0 duration-300 bg-white z-[999]  text-zinc-800 w-full sm:w-[35%]" : "fixed inset-0 flex flex-col items-center justify-center gap-4 translate-x-[100%] duration-300 "}>
-        <button className="close-menu absolute top-10 right-12" onClick={() => {setNav(!nav)}}>
-
-          <img src={closeIcon} alt="Mobile menu close icon" />
-
-        </button>
+        <ul
+          className={
+            nav
+              ? "fixed top-0 bottom-0 right-0 flex flex-col items-center justify-center gap-4 translate-x-0 duration-300 bg-white z-[999]  text-zinc-800 w-full sm:w-[35%]"
+              : "fixed inset-0 flex flex-col items-center justify-center gap-4 translate-x-[100%] duration-300 "
+          }
+        >
+          <button
+            className="close-menu absolute top-10 right-12"
+            onClick={() => {
+              setNav(!nav);
+            }}
+          >
+            <img src={closeIcon} alt="Mobile menu close icon" />
+          </button>
           <li>
-            <a
-              href=""
-              className="hover:text-cyan-500 duration-300 text-4xl"
-            >
+            <a href="" className="hover:text-cyan-500 duration-300 text-4xl">
               Home
             </a>
           </li>
           <li>
-            <a
-              href=""
-              className="hover:text-cyan-500 duration-300 text-4xl"
-            >
+            <a href="" className="hover:text-cyan-500 duration-300 text-4xl">
               New
             </a>
           </li>
           <li>
-            <a
-              href=""
-              className="hover:text-cyan-500 duration-300 text-4xl"
-            >
+            <a href="" className="hover:text-cyan-500 duration-300 text-4xl">
               Popular
             </a>
           </li>
           <li>
-            <a
-              href=""
-              className="hover:text-cyan-500 duration-300 text-4xl"
-            >
+            <a href="" className="hover:text-cyan-500 duration-300 text-4xl">
               Trending
             </a>
           </li>
           <li>
-            <a
-              href=""
-              className="hover:text-cyan-500 duration-300 text-4xl"
-            >
+            <a href="" className="hover:text-cyan-500 duration-300 text-4xl">
               Categories
             </a>
           </li>
-        
-
         </ul>
       </div>
     </nav>
